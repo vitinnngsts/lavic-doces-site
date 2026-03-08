@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>La Vic Doces | Doces Artesanais em Papagaios MG</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<meta name="description" content="Doces artesanais em Papagaios MG. Monte sua caixinha de brigadeiros e peça pelo WhatsApp.">
+
+<meta name="keywords" content="doces papagaios mg, brigadeiro papagaios, confeitaria papagaios, doces artesanais">
+
+<meta name="author" content="La Vic Doces">
+
+<link rel="icon" href="{{ url_for('static', filename='logo/logo.png') }}">
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+<a href="#" class="logo">La Vic Doces</a>
+
+<div class="nav-links">
+<a href="#cardapio">Cardápio</a>
+<a href="#contato">Contato</a>
+</div>
+
+</div>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>La Vic Doces</h1>
+
+<p>Doces artesanais feitos com amor</p>
+
+<button class="btn" onclick="document.getElementById('cardapio').scrollIntoView()">
+Ver Cardápio <i class="fas fa-arrow-down"></i>
+</button>
+
+</div>
+
+</section>
+
+<!-- CAIXINHA -->
+
+<section class="caixinha">
+
+<h2>Monte sua Caixinha 🍬</h2>
+
+<div class="caixa-opcoes">
+
+<div class="caixa-card">
+
+<h3>Caixa com 4 doces</h3>
+
+<p>Escolha 4 sabores</p>
+
+<span class="preco">R$ 10</span>
+
+<button onclick="abrirCaixa(4,10)">
+Montar Caixa
+</button>
+
+</div>
+
+<div class="caixa-card destaque">
+
+<h3>Caixa com 10 doces</h3>
+
+<p>Escolha até 10 sabores</p>
+
+<span class="preco">R$ 25</span>
+
+<button onclick="abrirCaixa(10,25)">
+Montar Caixa
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<div class="scroll-hint">
+⭐ 4.9 no Google • 🔥 Mais pedida da cidade
+</div>
+
+<div class="scroll-hint">
+Confira nosso cardápio completo
+</div>
+
+<!-- MODAL DA CAIXINHA -->
+
+<div id="modal-caixa" class="modal-caixa">
+
+<h2>Monte sua Caixinha</h2>
+
+<p id="contador-caixa">0 / 0 escolhidos</p>
+
+<div id="lista-doces" class="grid-doces"></div>
+
+<h3>Escolhidos</h3>
+
+<div id="doces-escolhidos"></div>
+
+<button onclick="confirmarCaixa()" class="btn">
+Adicionar Caixa
+</button>
+
+<button onclick="fecharCaixa()" class="fechar">
+Cancelar
+</button>
+
+</div>
+
+<!-- CARDÁPIO -->
+
+<section class="container" id="cardapio">
+
+<span class="section-subtitle">Nossas Delícias</span>
+
+<h2 class="section-title">Nosso Cardápio</h2>
+
+{% for categoria, produtos in cardapio.items() %}
+
+<h3 class="categoria" style="margin:40px 0 20px;color:var(--rosa-principal);font-size:24px;">
+{{ categoria.replace("_"," ").title() }}
+</h3>
+
+<div class="grid">
+
+{% for produto in produtos %}
+
+<div class="card">
+
+{% if produto.queridinho %}
+<div class="queridinho">⭐ Mais pedido</div>
+{% endif %}
+
+<div class="card-img-wrapper">
+<img src="{{ url_for('static', filename='fotos_doce/' + produto.imagem) }}">
+</div>
+
+<div class="card-body">
+
+<h3>{{ produto.nome }}</h3>
+
+<p>{{ produto.descricao }}</p>
+
+<p class="preco">
+R$ {{ "%.2f"|format(produto.preco) }}
+</p>
+
+<button class="btn-card"
+onclick="addCarrinho('{{produto.nome}}',{{produto.preco}})">
+Adicionar
+</button>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endfor %}
+
+</section>
+
+<!-- CARRINHO -->
+
+<div class="carrinho-btn" onclick="toggleCarrinho()">
+
+<i class="fas fa-shopping-cart"></i>
+
+<div id="contador" class="contador">0</div>
+
+</div>
+
+<div id="carrinho" class="carrinho">
+
+<h3>Seu pedido</h3>
+
+<div id="lista"></div>
+
+<div class="total-box">
+<span>Total:</span>
+<span id="total">R$ 0</span>
+</div>
+
+<br>
+
+<button class="btn" onclick="finalizar()">
+Enviar no WhatsApp
+</button>
+
+</div>
+
+<section class="localizacao">
+
+<p>
+📍 Rua Januario Duarte,163 Miguelão, Papagaios 35669000
+📞 (37) 9975-0473
+🕒 Seg-Dom
+</p>
+
+</section>
+
+<footer>
+
+<p>&copy; 2026 La Vic Doces. Todos os direitos reservados.</p>
+
+<a href="/privacidade">Política de Privacidade</a> |
+<a href="https://www.instagram.com/la_vic_doces?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Instagram</a>
+
+</footer>
+
+<script>
+
+
+
+
+// ---------------- CARRINHO ----------------
+
+let carrinho = []
+
+function addCarrinho(nome, preco){
+
+let item = carrinho.find(p => p.nome === nome)
+
+if(item){
+item.quantidade++
+}else{
+carrinho.push({
+nome:nome,
+preco:preco,
+quantidade:1
+})
+}
+
+atualizarCarrinho()
+
+}
+
+function aumentar(index){
+carrinho[index].quantidade++
+atualizarCarrinho()
+}
+
+function diminuir(index){
+
+if(carrinho[index].quantidade > 1){
+carrinho[index].quantidade--
+}else{
+carrinho.splice(index,1)
+}
+
+atualizarCarrinho()
+
+}
+
+function removerItem(index){
+carrinho.splice(index,1)
+atualizarCarrinho()
+}
+
+function atualizarCarrinho(){
+
+let lista = document.getElementById("lista")
+let total = document.getElementById("total")
+let contador = document.getElementById("contador")
+
+lista.innerHTML = ""
+
+let valorTotal = 0
+let totalItens = 0
+
+carrinho.forEach((p,index)=>{
+
+valorTotal += p.preco * p.quantidade
+totalItens += p.quantidade
+
+lista.innerHTML += `
+<div class="item-carrinho">
+
+<span class="nome">${p.nome}</span>
+
+<div class="quantidade">
+<button onclick="diminuir(${index})">-</button>
+<span>${p.quantidade}</span>
+<button onclick="aumentar(${index})">+</button>
+</div>
+
+<span class="preco">R$ ${(p.preco*p.quantidade).toFixed(2)}</span>
+
+<button onclick="removerItem(${index})" class="remover">✖</button>
+
+</div>
+`
+
+})
+
+total.innerText = "R$ " + valorTotal.toFixed(2)
+contador.innerText = totalItens
+
+}
+
+function toggleCarrinho(){
+
+let c = document.getElementById("carrinho")
+
+c.style.display = c.style.display == "block" ? "none" : "block"
+
+}
+
+function finalizar(){
+
+if(carrinho.length == 0){
+alert("Carrinho vazio")
+return
+}
+
+let mensagem = "🍰 Pedido - La Vic Doces\n\n"
+
+let total = 0
+
+carrinho.forEach(p => {
+
+let subtotal = p.preco * p.quantidade
+
+mensagem += `${p.nome} x${p.quantidade} — R$ ${subtotal.toFixed(2)}\n\n`
+
+total += subtotal
+
+})
+
+mensagem += `💰 Total: R$ ${total.toFixed(2)}`
+mensagem += `\n📍 Papagaios - MG`
+
+let url = "https://wa.me/553799750473?text=" + encodeURIComponent(mensagem)
+
+window.open(url)
+
+}
+
+// ---------------- CAIXINHA ----------------
+
+let tamanhoCaixa = 0
+let precoCaixa = 0
+let caixaDoces = {}
+
+const doces = [
+"Brigadeiro tradicional",
+"Brigadeiro leite ninho com nutella",
+"Brigadeiro de maracujá",
+"Casadinho",
+"Brigadeiro de paçoca",
+"Brigadeiro caramelo salgado",
+"Beijinho",
+"Leite Ninho",
+"Oreo"
+]
+
+function abrirCaixa(tamanho, preco){
+
+tamanhoCaixa = tamanho
+precoCaixa = preco
+caixaDoces = {}
+
+document.getElementById("modal-caixa").style.display = "block"
+
+renderDoces()
+atualizarCaixa()
+
+}
+
+function fecharCaixa(){
+
+document.getElementById("modal-caixa").style.display = "none"
+
+}
+
+function renderDoces(){
+
+let lista = document.getElementById("lista-doces")
+
+lista.innerHTML = ""
+
+doces.forEach(d => {
+
+lista.innerHTML += `
+<button class="doce-btn" onclick="selecionarDoce('${d}')">
+${d}
+</button>
+`
+
+})
+
+}
+
+function selecionarDoce(nome){
+
+let total = totalDoces()
+
+if(total >= tamanhoCaixa){
+alert("Caixa cheia")
+return
+}
+
+if(caixaDoces[nome]){
+caixaDoces[nome]++
+}else{
+caixaDoces[nome] = 1
+}
+
+atualizarCaixa()
+
+}
+
+function removerDoce(nome){
+
+delete caixaDoces[nome]
+
+atualizarCaixa()
+
+}
+
+function totalDoces(){
+
+let total = 0
+
+Object.values(caixaDoces).forEach(q=>{
+total += q
+})
+
+return total
+
+}
+
+function atualizarCaixa(){
+
+let lista = document.getElementById("doces-escolhidos")
+
+lista.innerHTML = ""
+
+for(let doce in caixaDoces){
+
+lista.innerHTML += `
+<div class="doce-escolhido">
+
+<span>${doce} x${caixaDoces[doce]}</span>
+
+<button onclick="removerDoce('${doce}')">✖</button>
+
+</div>
+`
+
+}
+
+document.getElementById("contador-caixa").innerText =
+totalDoces() + " / " + tamanhoCaixa
+
+}
+
+function confirmarCaixa(){
+
+if(totalDoces() != tamanhoCaixa){
+alert("Complete sua caixa")
+return
+}
+
+let sabores = ""
+
+for(let doce in caixaDoces){
+sabores += `• ${doce} x${caixaDoces[doce]}\n`
+}
+
+addCarrinho(
+`📦 Caixa ${tamanhoCaixa} doces\n${sabores}`,
+precoCaixa
+)
+
+fecharCaixa()
+
+}
+
+</script>
