@@ -38,6 +38,9 @@
 </div>
 
 </div>
+<a href="https://wa.me/5537999750473" class="whatsapp-float" target="_blank">
+<i class="fab fa-whatsapp"></i>
+</a>
 
 <!-- HERO -->
 
@@ -100,6 +103,22 @@ Montar Caixa
 <div class="scroll-hint">
 ⭐ 4.9 no Google • 🔥 Mais pedida da cidade
 </div>
+
+<section class="info-loja">
+
+<div class="info-item">
+⏱ Pedido pronto em até 30 minutos
+</div>
+
+<div class="info-item">
+📍 Papagaios MG
+</div>
+
+<div class="info-item">
+🚚 Entrega disponível ou retirada no local
+</div>
+
+</section>
 
 <div class="scroll-hint">
 Confira nosso cardápio completo
@@ -186,6 +205,8 @@ Adicionar
 
 <!-- CARRINHO -->
 
+
+
 <div class="carrinho-btn" onclick="toggleCarrinho()">
 
 <i class="fas fa-shopping-cart"></i>
@@ -194,7 +215,11 @@ Adicionar
 
 </div>
 
+
+
 <div id="carrinho" class="carrinho">
+
+<button class="fechar-carrinho" onclick="toggleCarrinho()">✕</button>
 
 <h3>Seu pedido</h3>
 
@@ -210,29 +235,80 @@ Adicionar
 
     <div class="pedido-info">
 
+<div class="pedido-opcoes">
+
 <h4>Forma de recebimento</h4>
 
-<select id="tipoEntrega">
-<option value="Retirada">Retirar no local</option>
-<option value="Entrega">Entrega</option>
-</select>
+<div class="opcoes">
+
+<label class="radio-opcao">
+<input type="radio" name="entrega" value="Retirada" checked>
+<span>Retirar no local</span>
+</label>
+
+<label class="radio-opcao">
+<input type="radio" name="entrega" value="Entrega">
+<span>Entrega</span>
+</label>
+
+</div>
 
 <h4>Forma de pagamento</h4>
 
-<select id="pagamento">
-<option value="Pix">Pix</option>
-<option value="Dinheiro">Dinheiro</option>
-<option value="Cartão">Cartão</option>
-</select>
+<div class="pagamentos">
 
-<input type="text" id="endereco" placeholder="Endereço para entrega (se necessário)">
+<label class="pagamento">
+<input type="radio" name="pagamento" value="Pix" checked>
+<span>Pix</span>
+</label>
 
+<label class="pagamento">
+<input type="radio" name="pagamento" value="Cartão">
+<span>Cartão</span>
+</label>
+
+<label class="pagamento">
+<input type="radio" name="pagamento" value="Dinheiro">
+<span>Dinheiro</span>
+</label>
+
+</div>
+
+</div>
 </div>
 
 <button class="btn" onclick="finalizar()">
 Enviar no WhatsApp
 </button>
 
+
+    <section class="avaliacoes">
+
+<h2>O que nossos clientes dizem</h2>
+
+<div class="avaliacoes-grid">
+
+<div class="avaliacao">
+⭐⭐⭐⭐⭐
+<p>“Melhor brigadeiro que já comi!”</p>
+<span>- Cliente</span>
+</div>
+
+<div class="avaliacao">
+⭐⭐⭐⭐⭐
+<p>“Doces maravilhosos e muito bem feitos.”</p>
+<span>- Cliente</span>
+</div>
+
+<div class="avaliacao">
+⭐⭐⭐⭐⭐
+<p>“A caixinha personalizada é incrível.”</p>
+<span>- Cliente</span>
+</div>
+
+</div>
+
+</section>
 </div>
 
 <section class="localizacao">
@@ -373,8 +449,8 @@ total += subtotal
 
 })
 
-let tipoEntrega = document.getElementById("tipoEntrega").value
-let pagamento = document.getElementById("pagamento").value
+let tipoEntrega = document.querySelector('input[name="entrega"]:checked').value
+let pagamento = document.querySelector('input[name="pagamento"]:checked').value
 let endereco = document.getElementById("endereco").value
 
 mensagem += `💰 Total: R$ ${total.toFixed(2)}`
