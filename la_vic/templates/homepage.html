@@ -332,9 +332,6 @@ Enviar no WhatsApp
 
 <script>
 
-
-
-
 // ---------------- CARRINHO ----------------
 
 let carrinho = []
@@ -451,7 +448,8 @@ total += subtotal
 
 let tipoEntrega = document.querySelector('input[name="entrega"]:checked').value
 let pagamento = document.querySelector('input[name="pagamento"]:checked').value
-let endereco = document.getElementById("endereco").value
+
+let endereco = ""
 
 mensagem += `💰 Total: R$ ${total.toFixed(2)}`
 mensagem += "\n📦 Recebimento: " + tipoEntrega
@@ -460,6 +458,7 @@ mensagem += "\n💳 Pagamento: " + pagamento
 if(tipoEntrega === "Entrega"){
 mensagem += "\n📍 Endereço: " + endereco
 }
+
 mensagem += `\n📍 Papagaios - MG`
 
 let url = "https://wa.me/553799750473?text=" + encodeURIComponent(mensagem)
@@ -467,6 +466,7 @@ let url = "https://wa.me/553799750473?text=" + encodeURIComponent(mensagem)
 window.open(url)
 
 }
+
 
 // ---------------- CAIXINHA ----------------
 
@@ -608,16 +608,5 @@ precoCaixa
 fecharCaixa()
 
 }
-    document.getElementById("tipoEntrega").addEventListener("change", function(){
-
-let endereco = document.getElementById("endereco")
-
-if(this.value === "Entrega"){
-endereco.style.display = "block"
-}else{
-endereco.style.display = "none"
-}
-
-})
 
 </script>
