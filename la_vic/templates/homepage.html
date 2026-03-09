@@ -205,7 +205,29 @@ Adicionar
 <span id="total">R$ 0</span>
 </div>
 
+
 <br>
+
+    <div class="pedido-info">
+
+<h4>Forma de recebimento</h4>
+
+<select id="tipoEntrega">
+<option value="Retirada">Retirar no local</option>
+<option value="Entrega">Entrega</option>
+</select>
+
+<h4>Forma de pagamento</h4>
+
+<select id="pagamento">
+<option value="Pix">Pix</option>
+<option value="Dinheiro">Dinheiro</option>
+<option value="Cartão">Cartão</option>
+</select>
+
+<input type="text" id="endereco" placeholder="Endereço para entrega (se necessário)">
+
+</div>
 
 <button class="btn" onclick="finalizar()">
 Enviar no WhatsApp
@@ -351,7 +373,17 @@ total += subtotal
 
 })
 
+let tipoEntrega = document.getElementById("tipoEntrega").value
+let pagamento = document.getElementById("pagamento").value
+let endereco = document.getElementById("endereco").value
+
 mensagem += `💰 Total: R$ ${total.toFixed(2)}`
+mensagem += "\n📦 Recebimento: " + tipoEntrega
+mensagem += "\n💳 Pagamento: " + pagamento
+
+if(tipoEntrega === "Entrega"){
+mensagem += "\n📍 Endereço: " + endereco
+}
 mensagem += `\n📍 Papagaios - MG`
 
 let url = "https://wa.me/553799750473?text=" + encodeURIComponent(mensagem)
@@ -500,5 +532,16 @@ precoCaixa
 fecharCaixa()
 
 }
+    document.getElementById("tipoEntrega").addEventListener("change", function(){
+
+let endereco = document.getElementById("endereco")
+
+if(this.value === "Entrega"){
+endereco.style.display = "block"
+}else{
+endereco.style.display = "none"
+}
+
+})
 
 </script>
