@@ -299,7 +299,11 @@ left:50%;
 transform:translate(-50%, -50%);
 
 width:380px;
-max-width:90%;
+max-width:92%;
+
+max-height:85vh;
+
+overflow-y:auto;
 
 background:white;
 
@@ -816,4 +820,55 @@ transform: scale(1.1);
 
 .whatsapp-float{
 animation: whatsappPulse 2s infinite;
+}
+
+@media (max-width:768px){
+
+.carrinho{
+
+width:95%;
+
+max-height:80vh;
+
+padding:20px;
+
+}
+
+}
+
+.radio-opcao input,
+.pagamento input{
+display:none;
+}
+
+.radio-opcao span,
+.pagamento span{
+
+display:inline-block;
+
+padding:10px 18px;
+
+border-radius:8px;
+
+border:2px solid #ddd;
+
+cursor:pointer;
+
+transition:0.3s;
+
+background:white;
+
+}
+
+/* quando selecionado */
+
+.radio-opcao input:checked + span,
+.pagamento input:checked + span{
+
+background:#ff4d88;
+
+color:white;
+
+border-color:#ff4d88;
+
 }
