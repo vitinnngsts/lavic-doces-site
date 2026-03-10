@@ -253,6 +253,12 @@ Adicionar
 
 </div>
 
+<input
+type="text"
+id="endereco"
+placeholder="Digite seu endereço"
+style="display:none;margin-top:10px;padding:10px;width:100%;border-radius:8px;border:1px solid #ddd;">
+
 <h4>Forma de pagamento</h4>
 
 <div class="pagamentos">
@@ -282,7 +288,9 @@ Enviar no WhatsApp
 </button>
 
 
-    <section class="avaliacoes">
+
+</div>
+ <section class="avaliacoes">
 
 <h2>O que nossos clientes dizem</h2>
 
@@ -309,8 +317,6 @@ Enviar no WhatsApp
 </div>
 
 </section>
-</div>
-
 <section class="localizacao">
 
 <p>
@@ -608,5 +614,21 @@ precoCaixa
 fecharCaixa()
 
 }
+
+    document.querySelectorAll('input[name="entrega"]').forEach(radio => {
+
+radio.addEventListener("change", function(){
+
+let endereco = document.getElementById("endereco")
+
+if(this.value === "Entrega"){
+endereco.style.display = "block"
+}else{
+endereco.style.display = "none"
+}
+
+})
+
+})
 
 </script>
