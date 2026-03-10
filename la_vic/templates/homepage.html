@@ -455,17 +455,18 @@ total += subtotal
 let tipoEntrega = document.querySelector('input[name="entrega"]:checked').value
 let pagamento = document.querySelector('input[name="pagamento"]:checked').value
 
-let endereco = ""
+let enderecoInput = document.getElementById("endereco")
+let endereco = enderecoInput ? enderecoInput.value : ""
 
 mensagem += `💰 Total: R$ ${total.toFixed(2)}`
 mensagem += "\n📦 Recebimento: " + tipoEntrega
 mensagem += "\n💳 Pagamento: " + pagamento
 
-if(tipoEntrega === "Entrega"){
+if(tipoEntrega === "Entrega" && endereco.trim() !== ""){
 mensagem += "\n📍 Endereço: " + endereco
 }
 
-mensagem += `\n📍 Papagaios - MG`
+mensagem += "\n📍 Papagaios - MG"
 
 let url = "https://wa.me/553799750473?text=" + encodeURIComponent(mensagem)
 
@@ -619,7 +620,8 @@ fecharCaixa()
 
 radio.addEventListener("change", function(){
 
-let endereco = document.getElementById("endereco")
+let enderecoInput = document.getElementById("endereco")
+let endereco = enderecoInput ? enderecoInput.value : ""
 
 if(this.value === "Entrega"){
 endereco.style.display = "block"
