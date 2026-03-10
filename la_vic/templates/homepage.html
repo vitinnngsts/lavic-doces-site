@@ -616,12 +616,11 @@ fecharCaixa()
 
 }
 
-    document.querySelectorAll('input[name="entrega"]').forEach(radio => {
+ document.querySelectorAll('input[name="entrega"]').forEach(radio => {
 
 radio.addEventListener("change", function(){
 
-let enderecoInput = document.getElementById("endereco")
-let endereco = enderecoInput ? enderecoInput.value : ""
+let endereco = document.getElementById("endereco")
 
 if(this.value === "Entrega"){
 endereco.style.display = "block"
