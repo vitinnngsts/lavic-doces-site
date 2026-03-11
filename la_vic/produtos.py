@@ -5,8 +5,8 @@ PRODUTOS_BOMBOM = [
     {"id": 3, "nome": "trufa de Limão", "descricao": "Bombom recheado sabor limão", "preco": 2.50, "imagem": "trufa_limao.jpg"},
     {"id": 4, "nome": "trufa de Brigadeiro", "descricao": "Bombom recheado com brigadeiro", "preco": 2.50, "imagem": "trufa_tradicional.jpg"},
     {"id": 5, "nome": "trufa de Coco", "descricao": "Bombom recheado sabor coco", "preco": 2.50, "imagem": "trufa_beijinho.jpg"},
-   # {"id": 6, "nome": "trufa de Leite Ninho", "descricao": "Bombom gourmet de leite ninho", "preco": 2.50, "imagem": "bombom_ninho.png"},
-   # {"id": 7, "nome": "trufa de Leite Ninho com Nutella", "descricao": "Bombom de leite ninho com recheio de Nutella", "preco": 2.50, "imagem": "bombom_ninho_nutella.png", "queridinho": True},
+    {"id": 6, "nome": "trufa de Leite Ninho", "descricao": "Bombom gourmet de leite ninho", "preco": 2.50, "imagem": "ninho.png"},
+    {"id": 7, "nome": "trufa de Leite Ninho com Nutella", "descricao": "Bombom de leite ninho com recheio de Nutella", "preco": 2.50, "imagem": "ninho_nutela.png", "queridinho": True},
    # {"id": 8, "nome": "trufa de Oreo", "descricao": "Bombom recheado com creme de Oreo", "preco": 2.50, "imagem": "bombom_oreo.png"}
 ]
 
